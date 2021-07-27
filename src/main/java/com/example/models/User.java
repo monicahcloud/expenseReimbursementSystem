@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="users")
+@Table(name="ers_users")
 public class User {
 	@Id
 	@Column(name="employee_number")
@@ -35,12 +35,12 @@ public class User {
 	@Column(name="role", nullable=false)
 	private String role;
 	
-	private List<Reimbursement> reimb;
-	
-	public User() {
-		setReimb(new ArrayList<Reimbursement>());
-	}
-	
+//	private List<Reimbursement> reimbList;
+//	
+//	public User() {
+//		setReimb(new ArrayList<Reimbursement>());
+//	}
+//	
 	public User(String firstName, String lastName, String password, String email, String role) {
 	
 		this.setEmpNumber(new Random().nextInt(9000)+1000);
@@ -125,13 +125,13 @@ public class User {
 				+ username + ", password=" + password + ", email=" + email + ", role=" + role + "]";
 	}
 
-	public List<Reimbursement> getReimb() {
-		return reimb;
-	}
-
-	public void setReimb(List<Reimbursement> reimb) {
-		this.reimb = reimb;
-	}
+//	public List<Reimbursement> getReimb() {
+//		return getReimb();
+//	}
+//
+//	public void setReimb(List<Reimbursement> reimb) {
+//		this.reimbList = reimb;
+//	}
 
 		
 }

@@ -1,20 +1,47 @@
 package com.example.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class User {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name="users")
+public class User {
+	@Id
+	@Column(name="employee_number")
 	private int empNumber;
+	
+	@Column(name="first_name", nullable=false)
 	private String firstName;
+	
+	@Column(name="last_name", nullable=false)
 	private String lastName;
+	
+	@Column(name="username", nullable=false, unique=true)
 	private String username;
+	
+	@Column(name="password", nullable=false)
 	private String password;
+	
+	@Column(name="email", nullable=false, unique=true)
 	private String email;
-	private UserRole role;
 	
-	public User() {}
+	@Column(name="role", nullable=false)
+	private String role;
 	
-	public User(String firstName, String lastName, String password, String email, UserRole role) {
+	private List<Reimbursement> reimb;
+	
+	public User() {
+		setReimb(new ArrayList<Reimbursement>());
+	}
+	
+	public User(String firstName, String lastName, String password, String email, String role) {
 	
 		this.setEmpNumber(new Random().nextInt(9000)+1000);
 		this.firstName = firstName;
@@ -25,7 +52,7 @@ public class User {
 		this.role = role;
 	}
 
-	public User(int empNumber, String firstName, String lastName, String username, String password, String email, UserRole role) {
+	public User(int empNumber, String firstName, String lastName, String username, String password, String email, String role) {
 		
 		this.setEmpNumber(new Random().nextInt(9000)+1000);
 		this.firstName = firstName;
@@ -84,21 +111,27 @@ public class User {
 		this.email = email;
 	}
 
-	public UserRole getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(UserRole role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 
 	@Override
 	public String toString() {
 		return "User [empNumber=" + empNumber + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
-				+ username + ", password=" + password + ", email=" + email + "]";
+				+ username + ", password=" + password + ", email=" + email + ", role=" + role + "]";
 	}
 
-	
-	
-	
+	public List<Reimbursement> getReimb() {
+		return reimb;
+	}
+
+	public void setReimb(List<Reimbursement> reimb) {
+		this.reimb = reimb;
+	}
+
+		
 }

@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -32,35 +38,58 @@ public class User {
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
-	@Column(name="role", nullable=false)
-	private String role;
+	@OneToMany(mappedBy = "userReimb", fetch = FetchType.LAZY)
+	private List<Reimbursement> reimbList = new ArrayList<Reimbursement>();
 	
-//	private List<Reimbursement> reimbList;
-//	
-//	public User() {
-//		setReimb(new ArrayList<Reimbursement>());
+	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="role_FK")
+	private UserRole role;
+		
+//	public User(String firstName, String lastName, String password, String email, UserRole userRole, Reimbursement r1) {
+//		this.setEmpNumber(new Random().nextInt(900)+100);
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
+//		this.password = password;
+//		this.email = email;
+//		this.userRole = userRole;
+//		
 //	}
-//	
-	public User(String firstName, String lastName, String password, String email, String role) {
 	
-		this.setEmpNumber(new Random().nextInt(9000)+1000);
+	public User(String firstName, String lastName, String password, String email, UserRole userRole) {
+	
+		this.setEmpNumber(new Random().nextInt(900)+100);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 		this.password = password;
 		this.email = email;
-		this.role = role;
+		this.role = userRole;
+		
 	}
 
-	public User(int empNumber, String firstName, String lastName, String username, String password, String email, String role) {
-		
-		this.setEmpNumber(new Random().nextInt(9000)+1000);
+	public User(String firstName, String lastName, String password, String email, UserRole userRole, List<Reimbursement> reimbList) {
+		this.setEmpNumber(new Random().nextInt(900)+100);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 		this.password = password;
 		this.email = email;
-		this.role = role;
+		this.role = userRole;
+		this.reimbList = reimbList;
+		
+	}
+
+	public User(int empNumber, String firstName, String lastName, String username, String password, String email, UserRole userRole) {
+		
+		this.setEmpNumber(new Random().nextInt(90)+10);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
+		this.password = password;
+		this.email = email;
+		this.role = userRole;
+
 	}
 
 	public int getEmpNumber() {
@@ -111,27 +140,21 @@ public class User {
 		this.email = email;
 	}
 
-	public String getRole() {
+	public List<Reimbursement> getReimbList() {
+		return reimbList;
+	}
+
+	public void setReimbList(List<Reimbursement> reimbList) {
+		this.reimbList = reimbList;
+	}
+
+	public UserRole getUserRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setUserRole(UserRole userRole) {
+		this.role = userRole;
 	}
 
-	@Override
-	public String toString() {
-		return "User [empNumber=" + empNumber + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
-				+ username + ", password=" + password + ", email=" + email + ", role=" + role + "]";
-	}
-
-//	public List<Reimbursement> getReimb() {
-//		return getReimb();
-//	}
-//
-//	public void setReimb(List<Reimbursement> reimb) {
-//		this.reimbList = reimb;
-//	}
-
-		
+ 		
 }

@@ -1,168 +1,72 @@
 package com.example.dao;
 
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.util.ArrayList;
-//import java.util.List;
-
-
-
+import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.example.models.User;
-
 import com.example.utils.HibernateUtil;
 
 public class UserDaoDB {
-	public UserDaoDB() {
-		
+	
+	public UserDaoDB() {	
 	}
 	
-	public void insert(User u) {
+	public void addUser(User u) {
 		
 		Session ses = HibernateUtil.getSession();
-		
 		Transaction tx = ses.beginTransaction();
 		
 		ses.save(u);
 		tx.commit();
-		ses.close();
+		}
+	
+	public User getUserByEmployeeNumber(int employee_number) {
+		Session ses = HibernateUtil.getSession();
+		User user = ses.get(User.class, employee_number );
+		return user;
 	}
 	
-//	
-//	ConnectionUtil conUtil = ConnectionUtil.getConnectionUtil();
-//
-//	@Override
-//	public List<User> getAllUsers() {
-//		
-//		List<User> userList = new ArrayList<User>();
-//		
-//		try {
-//			
-//			Connection con = conUtil.getConnection();
-//			
-//			String sql = "SELECT * FROM ers_users";
-//			
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			ResultSet rs = ps.executeQuery();
-//			
-//			while(rs.next()) {
-//				
-//				//userList.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
-//			}
-//			
-//		return userList;
-//		
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
-//	
-//
-//	@Override
-//	public User getUserByUserName(String username) {
-//		
-//		User u= new User();
-//		
-//		try {
-//			
-//			Connection con = conUtil.getConnection();
-//			String sql = "SELECT * FROM ers_users WHERE ers_users.username = '" + username + "'";
-//			
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			ps.setString(1, username);
-//			
-//			ResultSet rs = ps.executeQuery();
-//			
-//
-////			UserRole role;
-////			
-////			if(rs.getInt("USER_ROLE_ID")==2) {
-////				
-////				role = new UserRole("Employee");
-////				
-////			}else {
-////				role = new UserRole("Manager");
-////			}
-//			
-//			return u;	
-//
-//		} catch (SQLException e) {
-//				e.printStackTrace();
-//				}
-//		return null;
-//	}// end of getUserByUserName method
-//	
-//	
-//
-//	@Override
-//	public void createUser(User u) throws SQLException {
-//		
-//		
-//		Connection con = conUtil.getConnection();
-//		String sql = "INSERT INTO ers_users(employee_id, first_name, last_name,  username, password, email_address, employee_role) values"
-//				+ "(?,?,?,?,?,?,?)";
-//		
-//		PreparedStatement ps = con.prepareStatement(sql);
-//		
-//		ps.setInt (1, u.getEmpNumber());
-//		ps.setString(2, u.getFirstName());
-//		ps.setString(3, u.getLastName());
-//		ps.setString(5, u.getUsername());
-//		ps.setString(6, u.getPassword());
-//		ps.setString(4, u.getEmail());
-//		ps.setString(7, u.getRole());
-//			
-//		ps.execute();
-//		
-//	}
-//
-//	@Override
-//	public void updateUser(User u) throws SQLException {
-//		
-//		try {
-//	
-//		Connection con = conUtil.getConnection();
-//		String sql = "UPDATE ers_users SET first_name = ?, last_name = ?, email = ?, username = ?, password = ? " + "WHERE employee_id = ?";
-//		PreparedStatement ps = con.prepareStatement(sql);
-//		
-//		ps.setString(1, u.getFirstName());
-//		ps.setString(2, u.getLastName());
-//		ps.setString(3, u.getEmail());
-//		ps.setString(4, u.getUsername());
-//		ps.setString(5, u.getPassword());
-//		ps.setInt(6, u.getEmpNumber());
-//		
-//		ps.execute();
-//		
-//	} catch(SQLException e) {
-//		e.printStackTrace();
-//	}
-//	}
-//	
-//	
-//	
-//	@Override
-//	public void deleteUser(User u) {
-//		
-//try {
-//			
-//			Connection con = conUtil.getConnection();
-//			String sql = "DELETE FROM ers_users WHERE ers_users.employee_id = ?";
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			
-//			ps.setInt(1, u.getEmpNumber());
-//			
-//			ps.execute();
-//			
-//		} catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//	}
+	
+	public User selectByUsername(String username) {
+		Session ses = HibernateUtil.getSession();
+		List<User> userList = ses.createNativeQuery("select * from ers_users where name = '" + username + "'", User.class).list();
+	 return userList.get(0);
+	}
+	
+	
+	public void update(User u) {
+		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.beginTransaction();
+		ses.update(u);
+		tx.commit();
+	}
+	
+	public List<User>selectAll(){
+		Session ses = HibernateUtil.getSession();
+		List<User> userList = ses.createQuery("from User", User.class).list();
+		return userList;
+	}
+	
+	//employee
+	public User addRequest() {
+		Session ses = HibernateUtil.getSession();
+		
+		return null;
+	}
+	
+	//employee
+	public User viewStatus() {
+		Session ses = HibernateUtil.getSession();
+		
+		return null;
+	}
+	
+	//manager
+	public User ViewRequest() {
+		Session ses = HibernateUtil.getSession();
+		
+		return null;
+	}
 
 }

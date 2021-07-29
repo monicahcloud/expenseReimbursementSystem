@@ -1,12 +1,19 @@
 package com.example.models;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -19,41 +26,40 @@ public class Reimbursement {
 	private int reimb_id;
 	
 	@Column(name="reimb_amount", nullable=false)
-	private double reimbAmount;
+	private int reimbAmount;
 	
-	@Column(name="reimb_submitted", nullable=false)
+	@Column(name="reimb_submitted", nullable=true)
 	private Timestamp reimbSubmitted;
 	
-	@Column(name="reimb_resolved", nullable=false, unique=true)
+	@Column(name="reimb_resolved", nullable=true)
 	private Timestamp reimbResolved;
 	
-	@Column(name="reimb_description", nullable=false, unique=true)
+	@Column(name="reimb_description", nullable=false)
 	private String reimbDescription;
 	
-	@Column(name="reimb_receipt", nullable=false, unique=true)
-	private String reimbReceipt;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "reimb_status_FK")
+	private ReimbursementStatus status;
 	
-	@Column(name="reimb_status", nullable=false, unique=true)
-	private String reimbStatus;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "reimb_type_FK")
+	private ReimbursementType  type;
 	
-	@Column(name="reimb_type", nullable=false, unique=true)
-	private String reimbType;
-	
-	private List<User> userList;
-	
-	
-	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_reimb_FK")
+	private User userReimb;
+
+
 	public Reimbursement() {}
 	
-	public Reimbursement( double reimbAmount, Timestamp reimbSubmitted, Timestamp reimbResolved,
-			String reimbDescription, String reimbReceipt) {
+	public Reimbursement( int reimbAmount, String reimbDescription) {
 		
 		this.setReimb_id (new Random().nextInt(9000));
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
-		this.reimbReceipt = reimbReceipt;
+		
 	}
 
 	public int getReimb_id() {
@@ -64,11 +70,11 @@ public class Reimbursement {
 		this.reimb_id = reimb_id;
 	}
 
-	public double getReimbAmount() {
+	public int getReimbAmount() {
 		return reimbAmount;
 	}
 
-	public void setReimbAmount(double reimbAmount) {
+	public void setReimbAmount(int reimbAmount) {
 		this.reimbAmount = reimbAmount;
 	}
 
@@ -96,38 +102,28 @@ public class Reimbursement {
 		this.reimbDescription = reimbDescription;
 	}
 
-	public String getReimbReceipt() {
-		return reimbReceipt;
+	public ReimbursementStatus getReimbStatus() {
+		return status;
 	}
 
-	public void setReimbReceipt(String reimbReceipt) {
-		this.reimbReceipt = reimbReceipt;
-	}
-	
-
-	public String getReimbStatus() {
-		return reimbStatus;
+	public void setReimbStatus(ReimbursementStatus reimbStatus) {
+		this.status = reimbStatus;
 	}
 
-	public void setReimbStatus(String reimbStatus) {
-		this.reimbStatus = reimbStatus;
+	public ReimbursementType getReimbType() {
+		return type;
 	}
 
-	public String getReimbType() {
-		return reimbType;
-	}
-
-	public void setReimbType(String reimbType) {
-		this.reimbType = reimbType;
+	public void setReimbType(ReimbursementType reimbType) {
+		this.type = reimbType;
 	}
 	
 	
-
 	@Override
 	public String toString() {
 		return "Reimbursement [reimb_id=" + reimb_id + ", reimbAmount=" + reimbAmount + ", reimbSubmitted="
 				+ reimbSubmitted + ", reimbResolved=" + reimbResolved + ", reimbDescription=" + reimbDescription
-				+ ", reimbReceipt=" + reimbReceipt + ", reimbStatus=" + reimbStatus + ", reimbType=" + reimbType + "]";
+				+ ", reimbStatus=" + status + ", reimbType=" + type + "]";
 	}
 	
 	

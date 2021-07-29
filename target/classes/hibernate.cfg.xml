@@ -15,5 +15,9 @@
 		
 	<property name="hibernate.hbm2ddl.auto">create</property>
 	<mapping class="com.example.models.User"/>
+	<mapping class="com.example.models.Reimbursement"/>
+	<mapping class="com.example.models.UserRole"/>
+	<mapping class="com.example.models.ReimbursementStatus"/>
+	<mapping class="com.example.models.ReimbursementType"/>
 	</session-factory>
 	</hibernate-configuration>

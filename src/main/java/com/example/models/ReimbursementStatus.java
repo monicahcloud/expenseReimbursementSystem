@@ -1,11 +1,32 @@
 package com.example.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="reimbursements_status")
 public class ReimbursementStatus {
 	
 	
-	private int id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int Id;
+	
+	@Column(name="reimb_status")
+	@OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
+	private List<Reimbursement> reimbList = new ArrayList<Reimbursement>();
+	
 	private String reimbStatus;
 	
 	public ReimbursementStatus() {}
@@ -13,27 +34,14 @@ public class ReimbursementStatus {
 	
 	public ReimbursementStatus(String reimbStatus) {
 		
-		this.setId(new Random().nextInt(9000));
-		this.reimbStatus = reimbStatus;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
+	this.reimbStatus = reimbStatus;
 	}
 
 
 	@Override
 	public String toString() {
-		return "ReimbursementStatus [id=" + id + ", reimbStatus=" + reimbStatus + "]";
+		return "ReimbursementStatus [reimbStatus=" + reimbStatus + "]";
 	}
 	
-	
-	
-	
+		
 }

@@ -11,6 +11,7 @@ private static Session ses;
 	
 	private static SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 	
+	
 	public static Session getSession() {
 		if(ses == null) {
 			ses = sf.openSession();

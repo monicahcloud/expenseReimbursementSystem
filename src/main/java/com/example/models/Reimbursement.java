@@ -1,7 +1,8 @@
 package com.example.models;
 
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -15,6 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 
 @Entity
@@ -28,11 +33,15 @@ public class Reimbursement {
 	@Column(name="reimb_amount", nullable=false)
 	private int reimbAmount;
 	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="reimb_submitted", nullable=true)
-	private Timestamp reimbSubmitted;
+	private Date reimbSubmitted;
 	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="reimb_resolved", nullable=true)
-	private Timestamp reimbResolved;
+	private Date reimbResolved;
 	
 	@Column(name="reimb_description", nullable=false)
 	private String reimbDescription;
@@ -54,12 +63,26 @@ public class Reimbursement {
 	
 	public Reimbursement( int reimbAmount, String reimbDescription) {
 		
-		this.setReimb_id (new Random().nextInt(9000));
+		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
 		
+	}
+	
+	
+
+	public Reimbursement( int reimbAmount, 	String reimbDescription, ReimbursementStatus status, ReimbursementType type, User userReimb) {
+		this.setReimb_id (new Random().nextInt(900)+100);
+		
+		this.reimbAmount = reimbAmount;
+		this.reimbSubmitted = reimbSubmitted;
+		this.reimbResolved = reimbResolved;
+		this.reimbDescription = reimbDescription;
+		this.status = status;
+		this.type = type;
+		this.userReimb = userReimb;
 	}
 
 	public int getReimb_id() {
@@ -78,19 +101,19 @@ public class Reimbursement {
 		this.reimbAmount = reimbAmount;
 	}
 
-	public Timestamp getReimbSubmitted() {
+	public Date getReimbSubmitted() {
 		return reimbSubmitted;
 	}
 
-	public void setReimbSubmitted(Timestamp reimbSubmitted) {
+	public void setReimbSubmitted(Date reimbSubmitted) {
 		this.reimbSubmitted = reimbSubmitted;
 	}
 
-	public Timestamp getReimbResolved() {
+	public Date getReimbResolved() {
 		return reimbResolved;
 	}
 
-	public void setReimbResolved(Timestamp reimbResolved) {
+	public void setReimbResolved(Date reimbResolved) {
 		this.reimbResolved = reimbResolved;
 	}
 

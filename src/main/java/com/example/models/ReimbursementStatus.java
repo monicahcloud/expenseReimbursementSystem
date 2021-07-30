@@ -18,29 +18,30 @@ import javax.persistence.Table;
 @Table(name="reimbursements_status")
 public class ReimbursementStatus {
 	
-	
 	@Id
+	@Column(name="status_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int Id;
+	private int id;
 	
 	@Column(name="reimb_status")
+	private String status;
+	
 	@OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
 	private List<Reimbursement> reimbList = new ArrayList<Reimbursement>();
 	
-	private String reimbStatus;
 	
 	public ReimbursementStatus() {}
 	
 	
 	public ReimbursementStatus(String reimbStatus) {
 		
-	this.reimbStatus = reimbStatus;
+	this.status = status;
 	}
 
 
 	@Override
 	public String toString() {
-		return "ReimbursementStatus [reimbStatus=" + reimbStatus + "]";
+		return "ReimbursementStatus [status=" + status + "]";
 	}
 	
 		

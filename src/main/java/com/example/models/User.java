@@ -45,16 +45,7 @@ public class User {
 	@JoinColumn(name="role_FK")
 	private UserRole role;
 		
-//	public User(String firstName, String lastName, String password, String email, UserRole userRole, Reimbursement r1) {
-//		this.setEmpNumber(new Random().nextInt(900)+100);
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
-//		this.password = password;
-//		this.email = email;
-//		this.userRole = userRole;
-//		
-//	}
+
 	
 	public User(String firstName, String lastName, String password, String email, UserRole userRole) {
 	
@@ -82,7 +73,7 @@ public class User {
 
 	public User(int empNumber, String firstName, String lastName, String username, String password, String email, UserRole userRole) {
 		
-		this.setEmpNumber(new Random().nextInt(90)+10);
+		this.setEmpNumber(new Random().nextInt(900)+100);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
@@ -154,6 +145,12 @@ public class User {
 
 	public void setUserRole(UserRole userRole) {
 		this.role = userRole;
+	}
+	@Override
+	public String toString() {
+		return "User [empNumber=" + empNumber + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
+				+ username + ", password=" + password + ", email=" + email + ", reimbList=" + reimbList + ", role="
+				+ role + "]";
 	}
 
  		

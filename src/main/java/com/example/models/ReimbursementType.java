@@ -19,21 +19,23 @@ import javax.persistence.Table;
 public class ReimbursementType {
 	
 	@Id
+	@Column(name="type_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int Id;
+	private int id;
 	
 	@Column(name="reimb_type")
+	private String type;
+	
+
 	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
 	private List<Reimbursement> reimbList = new ArrayList<Reimbursement>();
 	
-	private String reimbType;
 	
 	public ReimbursementType() {}
 
-	public ReimbursementType(String reimbType) {
-		
-//		this.setId (new Random().nextInt(9000));
-		this.reimbType = reimbType;
+	public ReimbursementType(String type) {
+
+		this.type = type;
 	}
 
 //	public int getId() {
@@ -45,16 +47,16 @@ public class ReimbursementType {
 //	}
 
 	public String getReimbType() {
-		return reimbType;
+		return type;
 	}
 
-	public void setReimbType(String reimbType) {
-		this.reimbType = reimbType;
+	public void setReimbType(String type) {
+		this.type = type;
 	}
 
 	@Override
 	public String toString() {
-		return "ReimbursementType [reimbType=" + reimbType + "]";
+		return "ReimbursementType [type=" +type + "]";
 	}
 	
 	

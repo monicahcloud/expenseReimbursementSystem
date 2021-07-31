@@ -33,18 +33,10 @@ public class ReimbursementType {
 	
 	public ReimbursementType() {}
 
-	public ReimbursementType(String type) {
-
+	public ReimbursementType(int id, String type) {
+		this.id = id;
 		this.type = type;
 	}
-
-//	public int getId() {
-//		return id;
-//	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
 
 	public String getReimbType() {
 		return type;

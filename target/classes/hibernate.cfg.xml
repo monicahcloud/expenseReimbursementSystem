@@ -13,7 +13,7 @@
 	<property name="hibernate.format_sql">true</property>
 	<property name="hibernate.connection.pool_size">10</property>
 		
-	<property name="hibernate.hbm2ddl.auto">create</property>
+	<property name="hibernate.hbm2ddl.auto">update</property>
 	<mapping class="com.example.models.User"/>
 	<mapping class="com.example.models.Reimbursement"/>
 	<mapping class="com.example.models.UserRole"/>

@@ -38,15 +38,18 @@ public class User {
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
-	@OneToMany(mappedBy = "userReimb", fetch = FetchType.LAZY)
-	private List<Reimbursement> reimbList = new ArrayList<Reimbursement>();
+//	@OneToMany(mappedBy = "reimb_id", fetch = FetchType.LAZY)
+//	private List<Reimbursement> reimbList = new ArrayList<Reimbursement>();
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="role_FK")
 	private UserRole role;
 		
 
-	
+	public User() {
+		
+	}
+
 	public User(String firstName, String lastName, String password, String email, UserRole userRole) {
 	
 		this.setEmpNumber(new Random().nextInt(900)+100);
@@ -67,7 +70,7 @@ public class User {
 		this.password = password;
 		this.email = email;
 		this.role = userRole;
-		this.reimbList = reimbList;
+		//this.reimbList = reimbList;
 		
 	}
 
@@ -83,6 +86,7 @@ public class User {
 
 	}
 
+	
 	public int getEmpNumber() {
 		return empNumber;
 	}
@@ -131,13 +135,13 @@ public class User {
 		this.email = email;
 	}
 
-	public List<Reimbursement> getReimbList() {
-		return reimbList;
-	}
-
-	public void setReimbList(List<Reimbursement> reimbList) {
-		this.reimbList = reimbList;
-	}
+//	public List<Reimbursement> getReimbList() {
+//		return reimbList;
+//	}
+//
+//	public void setReimbList(List<Reimbursement> reimbList) {
+//		this.reimbList = reimbList;
+//	}
 
 	public UserRole getUserRole() {
 		return role;
@@ -149,8 +153,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [empNumber=" + empNumber + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
-				+ username + ", password=" + password + ", email=" + email + ", reimbList=" + reimbList + ", role="
-				+ role + "]";
+				+ username + ", password=" + password + ", email=" + email + ", role=" + role + "]";
 	}
 
  		

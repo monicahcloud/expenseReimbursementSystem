@@ -6,15 +6,21 @@ import java.util.List;
 import com.example.models.User;
 
 public interface UserDao {
-
+	
+	
+	void addUser(User u) throws SQLException;
+	
+	public User getUserByEmployeeNumber(int employee_number);
+	
+	public User selectByUsername(String username);
+		
+	void updateUser(User u);
+	
 	List<User> getAllUsers();
 	
 	User getUserByUserName(String username);
 	
-	void createUser(User u) throws SQLException;
-	
-	void updateUser(User u) throws SQLException;
-	
+		
 	void deleteUser(User u) throws SQLException;
 	
 	

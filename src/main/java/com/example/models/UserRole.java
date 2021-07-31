@@ -32,8 +32,8 @@ public class UserRole {
 	
 	public UserRole() {}
 	
-		public UserRole( String role) {
-		
+		public UserRole( int id, String role) {
+		this.id=id;
 		this.role = role;
 	}
 

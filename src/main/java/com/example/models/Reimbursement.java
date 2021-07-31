@@ -55,8 +55,16 @@ public class Reimbursement {
 	private ReimbursementType  type;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_reimb_FK")
-	private User userReimb;
+	@JoinColumn(name = "reimb_author", referencedColumnName = "employee_number")
+	private User reimb_author;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="reimb_resolver",  referencedColumnName = "employee_number")
+	private User reimb_resolver;
+	
+//	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "user_reimb_FK")
+//	private User userReimb;
 
 
 	public Reimbursement() {}
@@ -73,16 +81,46 @@ public class Reimbursement {
 	
 	
 
-	public Reimbursement( int reimbAmount, 	String reimbDescription, ReimbursementStatus status, ReimbursementType type, User userReimb) {
-		this.setReimb_id (new Random().nextInt(900)+100);
+	public Reimbursement( int reimbAmount, 	String reimbDescription, ReimbursementStatus status, ReimbursementType type) {
 		
+		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
 		this.status = status;
 		this.type = type;
-		this.userReimb = userReimb;
+	}
+	
+	
+	public Reimbursement( int reimbAmount, Date reimbSubmitted, Date reimbResolved,
+			String reimbDescription, ReimbursementStatus status, ReimbursementType type, User reimb_author,
+			User reimb_resolver) {
+		
+		this.setReimb_id (new Random().nextInt(900)+100);
+		this.reimbAmount = reimbAmount;
+		this.reimbSubmitted = reimbSubmitted;
+		this.reimbResolved = reimbResolved;
+		this.reimbDescription = reimbDescription;
+		this.status = status;
+		this.type = type;
+		this.reimb_author = reimb_author;
+		this.reimb_resolver = reimb_resolver;
+	}
+	
+	public Reimbursement(int reimb_id, int reimbAmount, Date reimbSubmitted, Date reimbResolved,
+			String reimbDescription, ReimbursementStatus status, ReimbursementType type, User reimb_author,
+			User reimb_resolver) {
+		
+		this.setReimb_id (new Random().nextInt(900)+100);
+		this.reimbAmount = reimbAmount;
+		this.reimbSubmitted = reimbSubmitted;
+		this.reimbResolved = reimbResolved;
+		this.reimbDescription = reimbDescription;
+		this.status = status;
+		this.type = type;
+		this.reimb_author = reimb_author;
+		this.reimb_resolver = reimb_resolver;
 	}
 
 	public int getReimb_id() {
@@ -125,30 +163,45 @@ public class Reimbursement {
 		this.reimbDescription = reimbDescription;
 	}
 
-	public ReimbursementStatus getReimbStatus() {
+	public ReimbursementStatus getStatus() {
 		return status;
 	}
 
-	public void setReimbStatus(ReimbursementStatus reimbStatus) {
-		this.status = reimbStatus;
+	public void setStatus(ReimbursementStatus status) {
+		this.status = status;
 	}
 
-	public ReimbursementType getReimbType() {
+	public ReimbursementType getType() {
 		return type;
 	}
 
-	public void setReimbType(ReimbursementType reimbType) {
-		this.type = reimbType;
+	public void setType(ReimbursementType type) {
+		this.type = type;
 	}
-	
-	
+
+	public User getReimb_author() {
+		return reimb_author;
+	}
+
+	public void setReimb_author(User reimb_author) {
+		this.reimb_author = reimb_author;
+	}
+
+	public User getReimb_resolver() {
+		return reimb_resolver;
+	}
+
+	public void setReimb_resolver(User reimb_resolver) {
+		this.reimb_resolver = reimb_resolver;
+	}
+
 	@Override
 	public String toString() {
 		return "Reimbursement [reimb_id=" + reimb_id + ", reimbAmount=" + reimbAmount + ", reimbSubmitted="
 				+ reimbSubmitted + ", reimbResolved=" + reimbResolved + ", reimbDescription=" + reimbDescription
-				+ ", reimbStatus=" + status + ", reimbType=" + type + "]";
-	}
+				+ ", status=" + status + ", type=" + type + ", reimb_author=" + reimb_author + ", reimb_resolver="
+				+ reimb_resolver + "]";
+	}//end of toString
+		
 	
-	
-	
-}
+}// end of class

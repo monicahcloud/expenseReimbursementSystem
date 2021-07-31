@@ -1,16 +1,17 @@
 package com.example.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.example.models.User;
+import com.example.models.UserRole;
 import com.example.utils.HibernateUtil;
 
-public class UserDaoDB {
+public class UserDaoDB implements UserDao {
 	
-	public UserDaoDB() {	
-	}
+	public UserDaoDB() {}
 	
 	public void addUser(User u) {
 		
@@ -22,6 +23,7 @@ public class UserDaoDB {
 		}
 	
 	public User getUserByEmployeeNumber(int employee_number) {
+		
 		Session ses = HibernateUtil.getSession();
 		User user = ses.get(User.class, employee_number );
 		return user;
@@ -29,44 +31,43 @@ public class UserDaoDB {
 	
 	
 	public User selectByUsername(String username) {
+		
 		Session ses = HibernateUtil.getSession();
 		List<User> userList = ses.createNativeQuery("select * from ers_users where name = '" + username + "'", User.class).list();
 	 return userList.get(0);
 	}
 	
 	
-	public void update(User u) {
+	public void updateUser(User u) {
+		
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.beginTransaction();
 		ses.update(u);
 		tx.commit();
 	}
 	
-	public List<User>selectAll(){
+	public List<User>getAllUsers(){
+		
 		Session ses = HibernateUtil.getSession();
 		List<User> userList = ses.createQuery("from User", User.class).list();
 		return userList;
 	}
 	
-	//employee
-	public User addRequest() {
+	@Override
+	public User getUserByUserName(String username) {
 		Session ses = HibernateUtil.getSession();
-		
-		return null;
+		User user = ses.get(User.class, username );
+		return user;
 	}
-	
-	//employee
-	public User viewStatus() {
+
+	@Override
+	public void deleteUser(User u) throws SQLException {
 		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.beginTransaction();
 		
-		return null;
-	}
-	
-	//manager
-	public User ViewRequest() {
-		Session ses = HibernateUtil.getSession();
+		ses.delete(u);
+		tx.commit();
 		
-		return null;
 	}
 
 }

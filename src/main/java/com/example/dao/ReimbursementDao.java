@@ -7,18 +7,17 @@ import com.example.models.Reimbursement;
 import com.example.models.User;
 
 public interface ReimbursementDao {
-
-	List<Reimbursement> getAllReimbursement();
 	
-	public List<Reimbursement> getUserReimbursement(User u);
+	void addReimb(Reimbursement r) throws SQLException;
+	
+	List<Reimbursement> getAllReimbursement();
 	
 	Reimbursement getReimbursementByUser(User u);
 	
-	void createReimb(User u) throws SQLException;
+	void updateReimb(Reimbursement r) ;
 	
-	void updateReimb(User u) throws SQLException;
+	void deleteReimb(Reimbursement r);
 	
-	void deleteReimb(User u) throws SQLException;
-	
+	public List<Reimbursement> getUserReimbursement(Reimbursement r);;
 	
 }

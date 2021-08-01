@@ -41,8 +41,8 @@ public class ReimbursementDaoDB implements ReimbursementDao{
 	public List<Reimbursement> selectAllReimb(){
 		
 		Session ses = HibernateUtil.getSession();
-		List<Reimbursement> reimbList = ses.createQuery("from Reimbursement", Reimbursement.class).list();
-		return reimbList;
+		List<Reimbursement> rList = ses.createQuery("from Reimbursement", Reimbursement.class).list();
+		return rList;
 	}
 
 	

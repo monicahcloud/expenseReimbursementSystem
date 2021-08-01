@@ -108,6 +108,20 @@ public class Reimbursement {
 		this.reimb_resolver = reimb_resolver;
 	}
 	
+	
+	
+	public Reimbursement(int reimbAmount, String reimbDescription, ReimbursementStatus status, ReimbursementType type,
+			User reimb_author, User reimb_resolver) {
+		super();
+		this.setReimb_id (new Random().nextInt(900)+100);
+		this.reimbAmount = reimbAmount;
+		this.reimbDescription = reimbDescription;
+		this.status = status;
+		this.type = type;
+		this.reimb_author = reimb_author;
+		this.reimb_resolver = reimb_resolver;
+	}
+
 	public Reimbursement(int reimb_id, int reimbAmount, Date reimbSubmitted, Date reimbResolved,
 			String reimbDescription, ReimbursementStatus status, ReimbursementType type, User reimb_author,
 			User reimb_resolver) {

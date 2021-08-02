@@ -70,8 +70,7 @@ public class User {
 		this.password = password;
 		this.email = email;
 		this.role = userRole;
-		//this.reimbList = reimbList;
-		
+	
 	}
 
 	public User(int empNumber, String firstName, String lastName, String username, String password, String email, UserRole userRole) {
@@ -86,7 +85,19 @@ public class User {
 
 	}
 
-	
+
+	public User(int empNumber, String firstName, String lastName, String password, String email, UserRole userRole) {
+		super();
+		this.setEmpNumber(new Random().nextInt(900)+100);
+		this.empNumber = empNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
+		this.password = password;
+		this.email = email;
+		this.role = userRole;
+	}
+
 	public int getEmpNumber() {
 		return empNumber;
 	}

@@ -20,18 +20,18 @@ public class UserServices {
 		this.uDao = uDao;
 	}
 	
+	
+	
 	public User login (String username, String password) {
 	
 	User u = uDao.getUserByUserName(username);
 	
 	if(u.getEmpNumber() == 0) {
-	
 		Logging.logger.warn("User tried logging in that does not exist");
 		throw new UserDoesNotExistException();
 	}
 	
 	if(!u.getPassword().equals(password)) {
-	
 		Logging.logger.warn("User tried to login with invalid credentials");
 		throw new InvalidCredentialsException();
 	

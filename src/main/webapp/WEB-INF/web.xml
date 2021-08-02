@@ -3,7 +3,6 @@
 >
 	<display-name>ExpenseReimbursementSystem</display-name>
 	
-	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
@@ -13,8 +12,6 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	
-	
-
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<servlet-class>com.example.servlet.LoginServlet</servlet-class>
@@ -53,6 +50,16 @@
   <servlet-mapping>
   	<servlet-name>ManagerServicesServlet</servlet-name>
   	<url-pattern>/managerServices</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>UserServlet</servlet-name>
+  	<servlet-class>com.example.servlet.UserServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>UserServlet</servlet-name>
+  	<url-pattern>/users</url-pattern>
   </servlet-mapping>
   
   

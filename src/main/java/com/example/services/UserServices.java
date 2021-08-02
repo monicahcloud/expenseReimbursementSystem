@@ -26,7 +26,7 @@ public class UserServices {
 	
 	User u = uDao.getUserByUserName(username);
 	
-	if(u.getEmpNumber() == 0) {
+	if(!u.getUsername().equals(username)) {
 		Logging.logger.warn("User tried logging in that does not exist");
 		throw new UserDoesNotExistException();
 	}

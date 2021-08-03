@@ -14,11 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="reimbursements_type")
 public class ReimbursementType {
 	
 	@Id
+	@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 	@Column(name="type_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;

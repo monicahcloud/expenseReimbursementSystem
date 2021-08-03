@@ -21,8 +21,11 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
+@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Table(name="reimbursements")
 public class Reimbursement {
 	

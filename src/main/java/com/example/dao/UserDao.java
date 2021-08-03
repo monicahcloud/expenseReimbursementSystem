@@ -12,8 +12,6 @@ public interface UserDao {
 	
 	public User getUserByEmployeeNumber(int employee_number);
 	
-	public User selectByUsername(String username);
-		
 	void updateUser(User u);
 	
 	List<User> getAllUsers();

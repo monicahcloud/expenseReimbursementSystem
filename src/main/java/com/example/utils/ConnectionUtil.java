@@ -31,6 +31,7 @@ public class ConnectionUtil {
 		String password = "";
 		
 		try {
+			
 			prop.load(is);
 			url = (String)prop.getProperty("url");
 			username = (String)prop.getProperty("username");
@@ -41,9 +42,11 @@ public class ConnectionUtil {
 		
 		Connection con;
 		try {
-			con = DriverManager.getConnection(url, username, password);
+			Class.forName("org.postgresql.Driver");
+			con = DriverManager.getConnection(url, username, password); 
 			return con;
-		} catch(SQLException e) {
+			
+		} catch(SQLException|ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		

@@ -26,7 +26,7 @@ public class UserServices {
 	
 	User u = uDao.getUserByUserName(username);
 	
-	if(!u.getUsername().equals(username)) {
+	if(u.getUsername()== null) {
 		Logging.logger.warn("User tried logging in that does not exist");
 		throw new UserDoesNotExistException();
 	}
@@ -49,12 +49,10 @@ public class UserServices {
 		User u = new User(firstName, lastName, password, email, userRole);
 	
 		try {
-			
 			uDao.addUser(u);
 			Logging.logger.info("New user has registered");
 			
 		} catch (SQLException e) {
-		
 			Logging.logger.warn("Username created that already exists in the database");
 			throw new UserNameNotAvailable();
 		}

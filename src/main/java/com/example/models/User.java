@@ -15,8 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
+@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Table(name="ers_users")
 public class User {
 	@Id

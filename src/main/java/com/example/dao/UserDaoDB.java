@@ -14,32 +14,19 @@ public class UserDaoDB implements UserDao {
 	public UserDaoDB() {}
 	
 	public void addUser(User u) {
-		
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.beginTransaction();
-		
 		ses.save(u);
 		tx.commit();
 		}
 	
 	public User getUserByEmployeeNumber(int employee_number) {
-		
 		Session ses = HibernateUtil.getSession();
 		User user = ses.get(User.class, employee_number );
 		return user;
 	}
 	
-	
-	public User selectByUsername(String username) {
-		
-		Session ses = HibernateUtil.getSession();
-		List<User> userList = ses.createNativeQuery("select * from ers_users where name = '" + username + "'", User.class).list();
-	 return userList.get(0);
-	}
-	
-	
 	public void updateUser(User u) {
-		
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.beginTransaction();
 		ses.update(u);
@@ -47,7 +34,6 @@ public class UserDaoDB implements UserDao {
 	}
 	
 	public List<User>getAllUsers(){
-		
 		Session ses = HibernateUtil.getSession();
 		List<User> userList = ses.createQuery("from User", User.class).list();
 		return userList;
@@ -56,7 +42,7 @@ public class UserDaoDB implements UserDao {
 	@Override
 	public User getUserByUserName(String username) {
 		Session ses = HibernateUtil.getSession();
-		User user = ses.get(User.class, username );
+		User user = ses.createQuery("from User where username=:username", User.class).setString("username", username).uniqueResult();
 		return user;
 	}
 
@@ -64,7 +50,6 @@ public class UserDaoDB implements UserDao {
 	public void deleteUser(User u) throws SQLException {
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.beginTransaction();
-		
 		ses.delete(u);
 		tx.commit();
 		

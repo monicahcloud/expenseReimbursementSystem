@@ -34,18 +34,17 @@ public class UserServiceTest {
 	
 	
 	@Test
-	public void testSignUp() {
-		UserRole r1 = new UserRole("EMPLOYEE");
-		UserRole r2 = new UserRole("MANAGER");
+	public void testLogin() {
+	UserRole r1 = new UserRole("EMPLOYEE");
+	UserRole r2 = new UserRole("MANAGER");
 		
 		User u = new User(1, "User", "Test", "test@email.com", "testpassword", r1);
 		User notUser = new User(0, "User", "Test", "test@email.com", "testpassword", r2);
 		
 		when(uDao.selectByUsername(anyString())).thenReturn(u);
+		User logIn = uServ.login("User", "testpassword");
 		
-		User signedIn = uServ.login("User", "testpassword");
-		
-		assertEquals(u.getEmpNumber(), signedIn.getEmpNumber());
+		assertEquals(u.getEmpNumber(), logIn.getEmpNumber());
 	}
 	
 	

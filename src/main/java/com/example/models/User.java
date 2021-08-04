@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.SQLQuery;
+
+import com.example.utils.HibernateUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -40,17 +44,26 @@ public class User {
 	
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
+
+	@JsonIgnore
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	private List<Reimbursement> reimbList;
 	
-//	@OneToMany(mappedBy = "reimb_id", fetch = FetchType.LAZY)
-//	private List<Reimbursement> reimbList = new ArrayList<Reimbursement>();
-	
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="role_FK")
 	private UserRole role;
-		
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "reimb_resolver", fetch = FetchType.LAZY)
+	private List<Reimbursement> remList = new ArrayList<Reimbursement>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "reimb_author", fetch = FetchType.LAZY)
+	private List<Reimbursement> reimList = new ArrayList<Reimbursement>();
 
 	public User() {
-		
+	reimbList = new ArrayList<Reimbursement>();
 	}
 
 	public User(String firstName, String lastName, String password, String email, UserRole userRole) {
@@ -101,6 +114,15 @@ public class User {
 		this.role = userRole;
 	}
 
+	private  UserRole retrieveRole(int role_id) {
+		String sql = "SELECT * FROM user_role WHERE employee_role =: role_id ";
+		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
+		query.addEntity(UserRole.class);
+		query.setParameter("employee_role", role_id);
+		List results = query.list();
+		return (UserRole)results.get(0);
+		
+	}
 	public int getEmpNumber() {
 		return empNumber;
 	}
@@ -149,13 +171,13 @@ public class User {
 		this.email = email;
 	}
 
-//	public List<Reimbursement> getReimbList() {
-//		return reimbList;
-//	}
-//
-//	public void setReimbList(List<Reimbursement> reimbList) {
-//		this.reimbList = reimbList;
-//	}
+	public List<Reimbursement> getReimbList() {
+		return reimbList;
+	}
+
+	public void setReimbList(List<Reimbursement> reimbList) {
+		this.reimbList = reimbList;
+	}
 
 	public UserRole getUserRole() {
 		return role;
@@ -169,6 +191,14 @@ public class User {
 		return "User [empNumber=" + empNumber + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
 				+ username + ", password=" + password + ", email=" + email + ", role=" + role + "]";
 	}
+
+//	public List<Reimbursement> getReimbList() {
+//		return reimbList;
+//	}
+//
+//	public void setReimbList(List<Reimbursement> reimbList) {
+//		this.reimbList = reimbList;
+//	}
 
  		
 }

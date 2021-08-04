@@ -8,16 +8,20 @@ import com.example.models.User;
 
 public interface ReimbursementDao {
 	
-	void addReimb(Reimbursement r) throws SQLException;
+	List<Reimbursement> selectAllReimb();
 	
-	List<Reimbursement> getAllReimbursement();
-	
-	Reimbursement getReimbursementByUser(User u);
+	Reimbursement getReimbursementByStatus();
 	
 	void updateReimb(Reimbursement r) ;
 	
 	void deleteReimb(Reimbursement r);
 	
-	public List<Reimbursement> getUserReimbursement(Reimbursement r);;
+	void submitReimb(Reimbursement r);
+	
+	Reimbursement selectReimbById(int reimb_id);
+	
+	public List<Reimbursement> selectResolved();
+	
+	public List<Reimbursement> selectPending();
 	
 }

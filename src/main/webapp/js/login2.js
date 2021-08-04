@@ -5,15 +5,13 @@ async function login(e){
 	let username = document.getElementById("username").value;
 	let password = document.getElementById("password").value;
 	
-	console.log(username, password);
-	
+	/*console.log(username, password);	*/
 	let user = {
 		username,
 		password,
-		
-	}
+			}
 	
-	console.log(user);
+	/*console.log(user);*/
 	
 	try{
 		let req = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/login', {
@@ -23,16 +21,20 @@ async function login(e){
 			},
 			body: JSON.stringify(user)
 		});
-		let res = await req.json();
-		console.log(res);
+		//let res = await req.json();
+		let res = await req.text();
+		/*console.log(res);*/
 	}catch(e){
 		alert('Username or password was incorrect');
 		return;
 	}
-location.href = './landing.html';
-}
+	
+	//need to figure out how to get the user-role to switch pages
+	
 if(role = "MANAGER"){
-	location.href = '.landing.html';
-}else ()
+	location.href = './employeeServices.html';
+}else (location.href = './employeeServices.html');
+}
+
 
 	

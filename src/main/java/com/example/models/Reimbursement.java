@@ -3,8 +3,10 @@ package com.example.models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +21,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.example.utils.HibernateUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -57,17 +62,22 @@ public class Reimbursement {
 	@JoinColumn(name = "reimb_type_FK")
 	private ReimbursementType  type;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "reimb_author", referencedColumnName = "employee_number")
 	private User reimb_author;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="reimb_resolver",  referencedColumnName = "employee_number")
 	private User reimb_resolver;
 	
-//	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JoinColumn(name = "user_reimb_FK")
-//	private User userReimb;
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_reimb_FK")
+	private User userReimb;
+	
+	Set<User> likes = new HashSet<>();
 
 
 	public Reimbursement() {}
@@ -82,8 +92,6 @@ public class Reimbursement {
 		
 	}
 	
-	
-
 	public Reimbursement( int reimbAmount, 	String reimbDescription, ReimbursementStatus status, ReimbursementType type) {
 		
 		this.setReimb_id (new Random().nextInt(900)+100);
@@ -91,10 +99,20 @@ public class Reimbursement {
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
-		this.status = status;
-		this.type = type;
+		this.status = retrieveStatus(1);;
+		this.type = retrieveType(reimb_id);;
 	}
-	
+	//employee create a reimbursement
+public Reimbursement( int reimbAmount, User reimb_author, ReimbursementType type, String reimbDescription) {
+		
+		this.setReimb_id (new Random().nextInt(900)+100);
+		this.reimbSubmitted = reimbSubmitted;
+		this.reimbAmount = reimbAmount;
+		this.reimb_author = reimb_author;
+		this.reimbDescription = reimbDescription;
+		this.type = retrieveType(reimb_id);;
+		}
+
 	
 	public Reimbursement( int reimbAmount, Date reimbSubmitted, Date reimbResolved,
 			String reimbDescription, ReimbursementStatus status, ReimbursementType type, User reimb_author,
@@ -105,8 +123,8 @@ public class Reimbursement {
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
-		this.status = status;
-		this.type = type;
+		this.status =  retrieveStatus(1);
+		this.type = retrieveType(reimb_id);;
 		this.reimb_author = reimb_author;
 		this.reimb_resolver = reimb_resolver;
 	}
@@ -119,13 +137,13 @@ public class Reimbursement {
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbDescription = reimbDescription;
-		this.status = status;
-		this.type = type;
+		this.status =  retrieveStatus(1);
+		this.type = retrieveType(reimb_id);;
 		this.reimb_author = reimb_author;
 		this.reimb_resolver = reimb_resolver;
 	}
 
-	public Reimbursement(int reimb_id, int reimbAmount, Date reimbSubmitted, Date reimbResolved,
+	public Reimbursement( int id, int reimbAmount, Date reimbSubmitted, Date reimbResolved,
 			String reimbDescription, ReimbursementStatus status, ReimbursementType type, User reimb_author,
 			User reimb_resolver) {
 		
@@ -134,12 +152,31 @@ public class Reimbursement {
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
-		this.status = status;
-		this.type = type;
+		this.status = retrieveStatus(1);
+		this.type = retrieveType(reimb_id);
 		this.reimb_author = reimb_author;
 		this.reimb_resolver = reimb_resolver;
 	}
-
+	
+	private  ReimbursementStatus retrieveStatus(int reimb_id1) {
+		String sql = "SELECT * FROM reimb_status WHERE status_id: reimb_id ";
+		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
+		query.addEntity(ReimbursementStatus.class);
+		query.setParameter("reimb_id", reimb_id1);
+		List results = query.list();
+		return (ReimbursementStatus)results.get(0);
+		
+	}
+	
+	private  ReimbursementType retrieveType(int reimb_id1) {
+		String sql = "SELECT * FROM reimb_type WHERE type_id: reimb_id ";
+		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
+		query.addEntity(ReimbursementType.class);
+		query.setParameter("reimb_id", reimb_id1);
+		List results = query.list();
+		return (ReimbursementType)results.get(0);
+		
+	}
 	public int getReimb_id() {
 		return reimb_id;
 	}

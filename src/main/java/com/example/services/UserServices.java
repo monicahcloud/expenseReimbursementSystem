@@ -59,7 +59,9 @@ public class UserServices {
 		 
 		return u;
 }// end of signUp
-	
+	public User getUserById(int employee_number) {
+		return uDao.getUserByEmployeeNumber(employee_number);
+	}
 
 }//end of class
 

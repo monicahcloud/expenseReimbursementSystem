@@ -28,14 +28,10 @@ public List<Reimbursement> getAllRemib(){
 }
 
 
-public Reimbursement submitReimb(int reimbAmount, User reimb_author, ReimbursementType type, String reimbDescription) {
+public void submitReimb(int reimbAmount,  String reimbDescription, ReimbursementType type, User reimb_author) {
 	
-	Reimbursement r = new Reimbursement(reimbAmount, reimb_author, type, reimbDescription);
+	Reimbursement r = new Reimbursement(reimbAmount,  reimbDescription, type, reimb_author);
 	rDao.submitReimb(r);
-	Logging.logger.info("New remibursement has been submitted.,");
-	List<Reimbursement> rList = reimb_author.getReimbList();
-	rList.add(r);
-	return r;
 }
 
 

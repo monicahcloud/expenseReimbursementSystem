@@ -1,107 +1,69 @@
-$(document).ready(function(){
-$('#submitReimb').click(function(event){
-	
-	$("#submitTable").append(`<div class="table-responsive">
-  <table class="table"><caption>Submit Reimbursement</caption>
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Date Submitted</th>
-      <th scope="col">Reimbursement Amount</th>
-      <th scope="col">Employee Number</th>
-      <th scope="col">Description</th>
-      <th scope="col">Type of Reimbursement</th>
-    </tr>
-  </thead>
-  </table>
-	
-	</div>`)
-})
-
-/*let container = document.getElementById('employee-container');
+console.log("In employee js");
 
 
-/*async function getReimbursement(){
-	let res = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/login');
+window.onload = getReimbursement();
+
+let container = document.getElementById('employee-container');
+
+async function getReimbursement(){
+	let res = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/reimbursements');
 	let data = await res.json();
 	populateReimbursement(data);
-}*/
 
-/*
-function populateReimbursement(data){
+}
+
+
+function populate(data) {
 	for (postObj of data) {
-        let reimb = document.createElement('div');
-        reimb.innerHTML = `<h2>${postObj.username}</h2>
-                      <p>${postObj.content}</p>`;
-        console.log(postObj);
-        container.append(reimb);
-    }
-}
-document.getElementById('submitReimb').addEventListener('click', submitReimb);
-*/
-/*async function submitReimb(e){
-	e.preventDefault();
-	let req = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/reimbursements);
-	let res = await req.json();
-	let id = res.employee_number;
-	
-	let content = document.getElementById("reimbursement-request").value;
-	if(!content){
-		alert("You must have enter a request!");
-		return;
+		let post = document.createElement('div');
 		
-	var time = new Date().getTime()
-		
-	let reimbursement = {
-		reimb_id : reimbId,
-		reimb_amount: reimbAmount,
-		reimb_description: reimbDescription,
-		reimb_submitted: time,
-		reimb_author: reimbAuthor,
-		reimb_type: reimbType
+		post.innerHTML = `
+		<p>Reimbursement ID: ${postObj.reimb_id} </p>
+		<p>Reimbursement Amount: ${postObj.amount} </p>
+		<p>Reason: ${postObj.description}</p>
+		<p>Date submitted: ${postObj.date}</p>
+		<p>Date Employee ID: ${postObj.reimb_author}</p>
+        <p>Type: ${postObj.type}</p><br>`;
+		console.log(postObj);
+		container.append(post);
 	}
-	
-	await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/reimbursements', {
-		method: "POST",
-		contentType: "application/json",
-		body: JSON.stringify(reimbursement)
-	});
-	
-	req = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/reimbursements');
-	let data = await req.json();
-	container.innerHTML = '';
-	content.value='';
-	populatePosts(data);
 }
 
+/*document.getElementById('submitReimb').addEventListener('click', submitReimb);
 
-let logoutbtn = document.getElementById("logout").addEventListener("click", logout);
+async function newReq(e) {
+	e.preventDefault();
+	let amount = document.getElementById("amount").value;
+	let type = document.getElementById("type").value;
+	let description = document.getElementById("description").value;
 
-async function logout(){
-	let req = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/logout');
-	let res = await req.text();
-	console.log(res);
-	req = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/Logout');
-	res = await req.text();
-	console.log(res);
-	location.href = '../html/login.html';
-}
+	let out = {
+		amount,
+		type,
+		description
+	}
 
-getPosts();
-	}*/
-	/*$("#submitTable").append(<div class="table-responsive">
-  <table class="table"><caption>Submit Reimbursement</caption>
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Date Submitted</th>
-      <th scope="col">Reimbursement Amount</th>
-      <th scope="col">Employee Number</th>
-      <th scope="col">Description</th>
-      <th scope="col">Type of Reimbursement</th>
-    </tr>
-  </thead>
-  </table>
-</div>)*/
+	console.log(out);
+
+
+	try {
+		let req = await fetch('http://localhost:8080/ExpenseSystem/api/reimbursements', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(out)
+		});
+		let res = await req.text();
+		console.log(res);
+	} catch (e) {
+	console.log (e.stack);
+		alert('Something went Wrong');
+		return;
+	}
+		function logout() {
+			location.href = '/';
+		}
+*/
+
 	
-	});

@@ -26,7 +26,7 @@ public class Driver {
 		
 				
 		ReimbursementDaoDB rDao = new ReimbursementDaoDB();
-		ReimbursementServices rServ = new ReimbursementServices();
+		ReimbursementServices rServ = new ReimbursementServices(rDao, uDao);
 		
 		ReimbursementStatus reimbStatus1 = new ReimbursementStatus(1, "PENDING");
 		ReimbursementStatus reimbStatus2 = new ReimbursementStatus(2, "APPROVED");
@@ -40,35 +40,56 @@ public class Driver {
 		ReimbursementType reimbType3 = new ReimbursementType(3, "LODGING");
 		ReimbursementType reimbType4 = new ReimbursementType(4, "OTHER");
 		
-		User u = new User("Jane", "Doe", "password", "jane@gmail.com", uR2);
-		User u1 = new User("Joe", "Doe", "password", "john@gmail.com", uR1);
-		User u2 = new User("Jennifer", "Hudson", "password", "givingmyself@gmail.com", uR2);
+		User u = new User("Bugs", "Bunny",  "bugs@gmail.com","password", uR2);
+//		User u1 = new User("Roger", "Rabbit", "roger@gmail.com","password",  uR1);
+		User u2 = new User("Easter", "Buny", "egghunt@gmail.com","password",  uR2);
+		User u3 = new User("Elmer", "Fudge", "moody@gmail.com","password",  uR2);
+		User u4 = new User("Daffy", "Duck", "goofyr@gmail.com", "password",  uR1);
+		User u5 = new User("Mickey", "Mouse", "rodent@gmail.com","password",  uR2);
+		User u6= new User("Minnie", "Mouse", "lover@gmail.com","password",  uR2);
+		User u7 = new User("Taz", "Devil", "psycho@gmail.com","password",  uR1);
+		User u8 = new User("Miss", "Piggy", "bosslady@gmail.com","password",  uR2);
 		
-		User u3 = uServ.login("MickeyMouse1483", "password");
-		System.out.println(u);
-		
+//		User u3 = uServ.login("MickeyMouse1483", "password");
+//		System.out.println(u3);
+//		
 		//submit reimbursement
-		Reimbursement r = rServ.submitReimb(50, u , reimbType1 , "dinner with client at Intermezzio Cafe");
-		Reimbursement r1 = rServ.submitReimb(50, u1, reimbType3,"3 night business trip in San Diego, CA");	
+//		Reimbursement r = rServ.submitReimb(0,"business trip to Japan", reimbType4, u);
+//		Reimbursement r1 = rServ.submitReimb(0, "trip to Europe", reimbType4, u);
 	
-//		uDao.addUser(u2);
-//		uDao.addUser(u);
-//		uDao.addUser(u1);
-//
-//		
-//		rDao.addReimb(r1);
-//		Reimbursement r2 = new Reimbursement (150, "3 night business trip in San Diego, CA", reimbStatus1, reimbType3, u2, u);
-//		rDao.addReimb(r2);
-////		Reimbursement r3 = new Reimbursement (250, "Business Trip: Airplane and Car rental",  reimbStatus3, reimbType4);
-////		rDao.addReimb(r3);
-////		Reimbursement r4 = new Reimbursement (150, "personal mini vacation at companies expense",  reimbStatus2, reimbType2);
-////		rDao.addReimb(r4);
-//		
-//		List<Reimbursement> rList = new ArrayList<Reimbursement>();
-//		rList.add(r1);
-//		rList.add(r2);
-////		rList.add(r3);
-////		rList.add(r4);
+		uDao.addUser(u2);
+		uDao.addUser(u);
+		uDao.addUser(u3);
+
+		uDao.addUser(u4);
+		uDao.addUser(u5);
+		uDao.addUser(u6);
+
+		uDao.addUser(u7);
+		uDao.addUser(u8);
+//		uDao.addUser(u3);
+
+		Reimbursement r1 = new Reimbursement (150, "3 night business trip in San Diego, CA", reimbType3, u2);
+		rDao.addReimb(r1);
+		Reimbursement r2 = new Reimbursement (250, "Business Trip: Airplane and Car rental", reimbType1, u2);
+		rDao.addReimb(r2);
+		Reimbursement r3 = new Reimbursement (150, "personal mini vacation at companies expense", reimbType2, u3);
+		rDao.addReimb(r3);
+		
+		Reimbursement r5 = new Reimbursement (150, "3 night business trip in San Diego, CA", reimbType4, u4);
+		rDao.addReimb(r5);
+		Reimbursement r6 = new Reimbursement (250, "Business Trip: Airplane and Car rental", reimbType3, u5);
+		rDao.addReimb(r6);
+		Reimbursement r7 = new Reimbursement (150, "personal mini vacation at companies expense", reimbType1, u6);
+		rDao.addReimb(r7);
+		
+		List<Reimbursement> rList = new ArrayList<Reimbursement>();
+		rList.add(r1);
+		rList.add(r2);
+		rList.add(r3);
+		rList.add(r5);
+		rList.add(r6);
+		rList.add(r7);
 	
 		}
 

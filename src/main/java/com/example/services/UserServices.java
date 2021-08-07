@@ -64,4 +64,3 @@ public class UserServices {
 	}
 
 }//end of class
-

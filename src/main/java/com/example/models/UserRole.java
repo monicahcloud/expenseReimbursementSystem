@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -29,6 +31,8 @@ public class UserRole {
 	@Column(name="employee_role")
 	private String role;
 	
+	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "role", fetch=FetchType.LAZY)
 	private List<User> uList = new ArrayList<User>();
 	
@@ -56,6 +60,22 @@ public class UserRole {
 	@Override
 	public String toString() {
 		return "UserRole [role=" + role + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public List<User> getuList() {
+		return uList;
+	}
+
+	public void setuList(List<User> uList) {
+		this.uList = uList;
 	}
 	
 	

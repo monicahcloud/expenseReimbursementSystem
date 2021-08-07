@@ -72,12 +72,12 @@ public class Reimbursement {
 	@JoinColumn(name="reimb_resolver",  referencedColumnName = "employee_number")
 	private User reimb_resolver;
 	
-	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_reimb_FK")
-	private User userReimb;
+//	@JsonIgnore
+//	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "user_reimb_FK")
+//	private User userReimb;
 	
-	Set<User> likes = new HashSet<>();
+//	Set<User> likes = new HashSet<>();
 
 
 	public Reimbursement() {}
@@ -99,18 +99,26 @@ public class Reimbursement {
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
-		this.status = retrieveStatus(1);;
-		this.type = retrieveType(reimb_id);;
+		this.status = status;
+		this.type = type;
 	}
-	//employee create a reimbursement
-public Reimbursement( int reimbAmount, User reimb_author, ReimbursementType type, String reimbDescription) {
+//	public User getUserReimb() {
+//		return userReimb;
+//	}
+//
+//	public void setUserReimb(User userReimb) {
+//		this.userReimb = userReimb;
+//	}
+
+//employee create a reimbursement
+	public Reimbursement( int reimbAmount,  String reimbDescription ,ReimbursementType type ,User reimb_author) {
 		
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbAmount = reimbAmount;
 		this.reimb_author = reimb_author;
 		this.reimbDescription = reimbDescription;
-		this.type = retrieveType(reimb_id);;
+		this.type = type;
 		}
 
 	
@@ -123,22 +131,33 @@ public Reimbursement( int reimbAmount, User reimb_author, ReimbursementType type
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
-		this.status =  retrieveStatus(1);
-		this.type = retrieveType(reimb_id);;
+		this.status =  status;
+		this.type = type;
 		this.reimb_author = reimb_author;
 		this.reimb_resolver = reimb_resolver;
 	}
 	
 	
 	
+	public Reimbursement( int reimbAmount, Date reimbSubmitted, String reimbDescription,
+			ReimbursementType type, User reimb_author) {
+		super();
+		this.setReimb_id (new Random().nextInt(900)+100);
+		this.reimbAmount = reimbAmount;
+		this.reimbSubmitted = reimbSubmitted;
+		this.reimbDescription = reimbDescription;
+		this.type = type;
+		this.reimb_author = reimb_author;
+	}
+
 	public Reimbursement(int reimbAmount, String reimbDescription, ReimbursementStatus status, ReimbursementType type,
 			User reimb_author, User reimb_resolver) {
 		super();
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbDescription = reimbDescription;
-		this.status =  retrieveStatus(1);
-		this.type = retrieveType(reimb_id);;
+		this.status =  status;
+		this.type = type;
 		this.reimb_author = reimb_author;
 		this.reimb_resolver = reimb_resolver;
 	}
@@ -152,31 +171,31 @@ public Reimbursement( int reimbAmount, User reimb_author, ReimbursementType type
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
 		this.reimbDescription = reimbDescription;
-		this.status = retrieveStatus(1);
-		this.type = retrieveType(reimb_id);
+		this.status = status;
+		this.type = type;
 		this.reimb_author = reimb_author;
 		this.reimb_resolver = reimb_resolver;
 	}
 	
-	private  ReimbursementStatus retrieveStatus(int reimb_id1) {
-		String sql = "SELECT * FROM reimb_status WHERE status_id: reimb_id ";
-		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
-		query.addEntity(ReimbursementStatus.class);
-		query.setParameter("reimb_id", reimb_id1);
-		List results = query.list();
-		return (ReimbursementStatus)results.get(0);
-		
-	}
-	
-	private  ReimbursementType retrieveType(int reimb_id1) {
-		String sql = "SELECT * FROM reimb_type WHERE type_id: reimb_id ";
-		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
-		query.addEntity(ReimbursementType.class);
-		query.setParameter("reimb_id", reimb_id1);
-		List results = query.list();
-		return (ReimbursementType)results.get(0);
-		
-	}
+//	private  ReimbursementStatus retrieveStatus(int reimb_id1) {
+//		String sql = "SELECT * FROM reimb_status WHERE status_id: reimb_id ";
+//		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
+//		query.addEntity(ReimbursementStatus.class);
+//		query.setParameter("reimb_id", reimb_id1);
+//		List results = query.list();
+//		return (ReimbursementStatus)results.get(0);
+//		
+//	}
+//	
+//	private  ReimbursementType retrieveType(int reimb_id1) {
+//		String sql = "SELECT * FROM reimb_type WHERE type_id: reimb_id ";
+//		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
+//		query.addEntity(ReimbursementType.class);
+//		query.setParameter("reimb_id", reimb_id1);
+//		List results = query.list();
+//		return (ReimbursementType)results.get(0);
+//		
+//	}
 	public int getReimb_id() {
 		return reimb_id;
 	}

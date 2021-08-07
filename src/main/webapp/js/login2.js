@@ -35,6 +35,3 @@ if(role = "MANAGER"){
 	location.href = './employeeServices.html';
 }else (location.href = './employeeServices.html');
 }
-
-
-	

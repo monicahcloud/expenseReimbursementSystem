@@ -36,32 +36,68 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 				res.setHeader("Access-Control-Allow-Methods", "GET");
 				res.getWriter().write(new ObjectMapper().writeValueAsString(rList));
 				
-			}else {
-				
-				StringBuilder buffer = new StringBuilder();
-				BufferedReader reader = req.getReader();
-				
-				String line;
-				while((line = reader.readLine()) != null) {
-					buffer.append(line);
-					buffer.append(System.lineSeparator());
-				}
-				String data = buffer.toString();
-				System.out.println(data);
-				ObjectMapper mapper = new ObjectMapper();
-				JsonNode parsedObj = mapper.readTree(data);
-				
-				int employeeID = Integer.parseInt(parsedObj.get("employeeId").asText());
-				
-				String content = parsedObj.get("content").asText();
-				User u = uServ.getUserById(employeeID);
-				rServ.submitReimb(employeeID, null, null, content);
-				
-				ObjectNode ret = mapper.createObjectNode();
-				ret.put("message", "successfully submitted a new reimbursment");
-				res.addHeader("Access-Control-Allow-Origin", "*");
-				res.setHeader("Access-Control-Allow-Methods", "POST");
-				res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
 			}
-			}
-	}
+//			else {
+//				
+//				StringBuilder buffer = new StringBuilder();
+//				BufferedReader reader = req.getReader();
+//				
+//				String line;
+//				while((line = reader.readLine()) != null) {
+//					buffer.append(line);
+//					buffer.append(System.lineSeparator());
+//				}
+//				String data = buffer.toString();
+//				System.out.println(data);
+//				ObjectMapper mapper = new ObjectMapper();
+//				JsonNode parsedObj = mapper.readTree(data);
+//				
+//				int employeeID = Integer.parseInt(parsedObj.get("employeeId").asText());
+//				
+//				String content = parsedObj.get("content").asText();
+//				User u = uServ.getUserById(employeeID);
+//				rServ.submitReimb(employeeID, null, null, content);
+//				
+//				ObjectNode ret = mapper.createObjectNode();
+//				ret.put("message", "successfully submitted a new reimbursment");
+//				res.addHeader("Access-Control-Allow-Origin", "*");
+//				res.setHeader("Access-Control-Allow-Methods", "POST");
+//				res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
+//			}
+//			}
+		}	}
+
+//		public static void submitReimb(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+//			
+//			StringBuilder buffer = new StringBuilder();
+//			BufferedReader reader = req.getReader();
+//			
+//			String line;
+//			while((line = reader.readLine()) != null) {
+//				buffer.append(line);
+//				buffer.append(System.lineSeparator());
+//			}
+//			String data = buffer.toString();
+//			System.out.println(data);
+//			ObjectMapper mapper = new ObjectMapper();
+//			JsonNode parsedObj = mapper.readTree(data);
+//			
+//			String type = parsedObj.get("result").asText();
+//			Reimbursement reimbtype;
+//			int amount = Integer.parseInt(parsedObj.get("amount").asText());
+//			Date date = parsedObj.get("date").asText().;
+//			//String resolveddate = parsedObj.get("resolveddate").asText();
+//			String description = parsedObj.get("description").asText();
+//			//Status status;
+//			String userName = parsedObj.get("username").asText();
+//			User employee = uServ.getUserByUsername(userName);
+//			ReimbursementStatus status = rDao.retrieveStatus();
+//			
+//			rServ.submitReimb( amount, date, description, type, employee);
+//			
+//			ObjectNode ret = mapper.createObjectNode();
+//			ret.put("message", "Successfully Sumbmitted A New Reimbursement Request");
+//			
+//			res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
+//		}
+	

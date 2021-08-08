@@ -46,13 +46,7 @@ $(document).ready(function () {
         else {
             let res = await req.json();
             console.log(res)
-            // if (res.userRole === 1) {
-            //     alert("HERE");
-
-            //     location.href = 'resources/employee';
-            // } else {
-            //     location.href = 'resources/manager';
-            // }
+           
         }
     }
     //Setting the event listener for the login button

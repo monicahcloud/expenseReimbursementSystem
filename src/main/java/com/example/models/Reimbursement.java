@@ -125,6 +125,17 @@ public class Reimbursement {
 		this.reimbDescription = reimbDescription;
 		this.type = type;
 		}
+	
+	public Reimbursement( int reimbAmount,  String reimbDescription , String type ,User reimb_author) {
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
+		this.setReimb_id (new Random().nextInt(900)+100);
+		this.reimbSubmitted = reimbSubmitted;
+		this.reimbAmount = reimbAmount;
+		this.reimb_author = reimb_author;
+		this.reimbDescription = reimbDescription;
+		
+		}
 
 	
 	public Reimbursement( int reimbAmount, Date reimbSubmitted, Date reimbResolved,

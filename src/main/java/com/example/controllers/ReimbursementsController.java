@@ -89,10 +89,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 			User a = uServ.getAuthor(roleId);
 			System.out.println(employeeID);
 			//ReimbursementType t = rServ.getReimbursementType(type);
-			Reimbursement r1 = new Reimbursement (amount, description,  u);
+			Reimbursement r1 = new Reimbursement (amount, description, u);
 			rDao.addReimb(r1);
-//			rDao.addReimb(null);
-//			rServ.addReimbursement(amount, description, u);
 			
 			ObjectNode ret = mapper.createObjectNode();
 			ret.put("message", "Successfully Sumbmitted A New Reimbursement Request");

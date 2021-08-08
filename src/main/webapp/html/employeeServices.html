@@ -20,14 +20,14 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-warning">
-    <a class="navbar-brand " href="./html/landing.html"><h2>
+    <a class="navbar-brand " href="./landing.html"><h2>
               The Sounds That Caresses Your Ears....
             </h2></a>
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-          <a class="nav-link" href="./html/landing.html">
+          <a class="nav-link" href="./landing.html">
             <h2>Home </h2> <span class="sr-only">(current)</span>
           </a>
         </li>
@@ -40,75 +40,38 @@
    <br><br>
   <h2> Employee Services</h2>
    
-    <br><br>
-    <form>
-      <button id="submitReimb" class="btn btn-primary" type="button">Submit a Reimbursement Request</button>
-      <br><br>
-      
-     <!--  <div class="table-responsive">
-  <table class="table"><caption>Submit Reimbursement</caption>
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Date Submitted</th>
-      <th scope="col">Reimbursement Amount</th>
-      <th scope="col">Employee Number</th>
-      <th scope="col">Description</th>
-      <th scope="col">Type of Reimbursement</th>
-    </tr>
-  </thead>
-  </table>
-</div> -->
-       <!-- <div class="form-group">
-		      <select class="form-control" id="dataType">
-			      <option value="3">Food</option>
-			      <option value="2">Lodging</option>
-			      <option value="4">Travel</option>
-			      <option value="1">Other</option>
-			    </select>
-		  </div>
-      <textarea id="reimbursement-request" name="content" cols="50" maxlength="250"
-                    placeholder="Reimbursement Description"></textarea><br>
-                <button id="new-post-btn">Submit new request</button>
-                <br><br> -->
-                
-      <button id="viewReimb"class="btn btn-primary" type="button">View Reimbursement Requests</button>
-      <h2>Reimbursements</h2>
-	<table id = "customers" class = "table table-dark table-hover">
-	<thead>
-		<tr>
-			<th scope="col">Reimbursement ID</th>
-			<th scope="col">Amount</th>
-			<th scope="col">Reason</th>
-			<th scope="col">Submitted</th>
-			<th scope="col">Employee ID</th>
-			<th scope="col">Type</th>
-	</tr>
-	</thead>
-	<tbody id='reimInfo'>
-	
-		</tbody>
-	</table>
-	
-      <br><br>
-      <button id="resolvedReimb"class="btn btn-primary" type="button">View Resolved Reimbursement Requests</button>
-      <br><br>
-       <button id="viewProfile" class="btn btn-primary" type="button">View Employee Profile</button>
-      <br><br>
-      <button id="updateProfile"class="btn btn-primary" type="button">Update Employee Profile</button>
-      <br><br>
-       <button id='logout'class="btn btn-primary" type="button">Logout</button>
-      
-     </form>
+     <div>
+      <h3>Create A New Reimbursement Request</h3>  <br>
+      <input name="employeeId" class="form-control" id="employeeId" placeholder="Enter Your Employee ID Number" required></input>
+      <input name="amount" class="form-control" id="amountInput" placeholder="Amount"required></input>
+      <input name="description" class="form-control" id="descriptionInput" placeholder="Description"required></input>
+      <br>
+
+      <input required name="type" type="radio" aria-label="Checkbox for following text input" value="1"
+        class="radio-group" id="travel">
+      <label class="form-check-label" for="defaultCheck1">TRAVEL</label><br>
+      <input name="type" type="radio" aria-label="Checkbox for following text input" value="2" class="radio-group"
+        id="food">
+      <label class="form-check-label" for="defaultCheck1">FOOD</label><br>
+      <input name="type" type="radio" aria-label="Checkbox for following text input" value="3" class="radio-group"
+        id="lodging">
+      <label class="form-check-label" for="defaultCheck1">LODGING</label><br>
+      <input name="type" type="radio" aria-label="Checkbox for following text input" value="4" class="radio-group"
+        id="other">
+      <label class="form-check-label" for="defaultCheck1">OTHER</label><br>
     </div>
-    
-    <div class="col">
-     <br><br>
-     <div id="post-container"> </div>
-     <div id= "submitTable">  </div>
-     <div id= "pendingTable">  </div>
-     <div id= "resolvedTable">  </div>
-     
+    <br>
+   
+
+    <a id="createReimbursements" class="btn btn-primary btn-lg" href="#" role="button">Submit Reimbursement Requests</a>
+
+    </p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+  <script src="resources/js/employee.js"></script>
+</body>
    
       
     </div>

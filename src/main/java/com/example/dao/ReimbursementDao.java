@@ -12,7 +12,7 @@ public interface ReimbursementDao {
 	
 	List<Reimbursement> selectAllReimb();
 	
-	ReimbursementStatus retrieveStatus();
+	//ReimbursementStatus retrieveStatus();
 	
 	Reimbursement updateReimb(Reimbursement r) ;
 	
@@ -27,7 +27,18 @@ public interface ReimbursementDao {
 	public List<Reimbursement> selectPending();
 	
 	ReimbursementType retrieveType(String rType);
+
+	User getUserByUsername(String username);
 	
+List<Reimbursement> getAllPendingReimbursmentsForUser(User u);
+	
+	List<Reimbursement> getAllAcceptedReimbursmentsForUser(User u);
+	
+	List<Reimbursement> getAllDeniedReimbursmentsForUser(User u);
+
+	ReimbursementType getReimbursementType(String ersType);
+	
+	ReimbursementType retrieveType(int reimb_id1);
 	
 	
 }

@@ -20,6 +20,10 @@ public interface UserDao {
 	
 		
 	void deleteUser(User u) throws SQLException;
+
+	User getUserById(int id);
+
+	User getAuthor(int author);
 	
 	
 }

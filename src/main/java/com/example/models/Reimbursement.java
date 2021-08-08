@@ -1,6 +1,8 @@
 package com.example.models;
 
 
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -54,21 +56,21 @@ public class Reimbursement {
 	@Column(name="reimb_description", nullable=false)
 	private String reimbDescription;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "reimb_status_FK")
 	private ReimbursementStatus status;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reimb_type_FK")
 	private ReimbursementType  type;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reimb_author", referencedColumnName = "employee_number")
 	private User reimb_author;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="reimb_resolver",  referencedColumnName = "employee_number")
 	private User reimb_resolver;
 	
@@ -83,7 +85,8 @@ public class Reimbursement {
 	public Reimbursement() {}
 	
 	public Reimbursement( int reimbAmount, String reimbDescription) {
-		
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
@@ -93,7 +96,8 @@ public class Reimbursement {
 	}
 	
 	public Reimbursement( int reimbAmount, 	String reimbDescription, ReimbursementStatus status, ReimbursementType type) {
-		
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
@@ -112,7 +116,8 @@ public class Reimbursement {
 
 //employee create a reimbursement
 	public Reimbursement( int reimbAmount,  String reimbDescription ,ReimbursementType type ,User reimb_author) {
-		
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbAmount = reimbAmount;
@@ -125,7 +130,8 @@ public class Reimbursement {
 	public Reimbursement( int reimbAmount, Date reimbSubmitted, Date reimbResolved,
 			String reimbDescription, ReimbursementStatus status, ReimbursementType type, User reimb_author,
 			User reimb_resolver) {
-		
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
@@ -141,7 +147,8 @@ public class Reimbursement {
 	
 	public Reimbursement( int reimbAmount, Date reimbSubmitted, String reimbDescription,
 			ReimbursementType type, User reimb_author) {
-		super();
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
@@ -152,7 +159,8 @@ public class Reimbursement {
 
 	public Reimbursement(int reimbAmount, String reimbDescription, ReimbursementStatus status, ReimbursementType type,
 			User reimb_author, User reimb_resolver) {
-		super();
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbDescription = reimbDescription;
@@ -165,7 +173,8 @@ public class Reimbursement {
 	public Reimbursement( int id, int reimbAmount, Date reimbSubmitted, Date reimbResolved,
 			String reimbDescription, ReimbursementStatus status, ReimbursementType type, User reimb_author,
 			User reimb_resolver) {
-		
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
 		this.setReimb_id (new Random().nextInt(900)+100);
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
@@ -177,25 +186,18 @@ public class Reimbursement {
 		this.reimb_resolver = reimb_resolver;
 	}
 	
-//	private  ReimbursementStatus retrieveStatus(int reimb_id1) {
-//		String sql = "SELECT * FROM reimb_status WHERE status_id: reimb_id ";
-//		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
-//		query.addEntity(ReimbursementStatus.class);
-//		query.setParameter("reimb_id", reimb_id1);
-//		List results = query.list();
-//		return (ReimbursementStatus)results.get(0);
-//		
-//	}
-//	
-//	private  ReimbursementType retrieveType(int reimb_id1) {
-//		String sql = "SELECT * FROM reimb_type WHERE type_id: reimb_id ";
-//		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
-//		query.addEntity(ReimbursementType.class);
-//		query.setParameter("reimb_id", reimb_id1);
-//		List results = query.list();
-//		return (ReimbursementType)results.get(0);
-//		
-//	}
+
+	public Reimbursement(int reimbAmount, String reimbDescription, User reimb_author) {
+		Date date = new Date();
+		Timestamp reimbsubmitted = new Timestamp(date.getTime());
+		this.setReimb_id (new Random().nextInt(900)+100);
+		this.reimbSubmitted = reimbSubmitted;
+		this.reimbAmount = reimbAmount;
+		this.reimb_author = reimb_author;
+		this.reimbDescription = reimbDescription;
+		this.type = type;
+	}
+
 	public int getReimb_id() {
 		return reimb_id;
 	}
@@ -272,9 +274,12 @@ public class Reimbursement {
 	public String toString() {
 		return "Reimbursement [reimb_id=" + reimb_id + ", reimbAmount=" + reimbAmount + ", reimbSubmitted="
 				+ reimbSubmitted + ", reimbResolved=" + reimbResolved + ", reimbDescription=" + reimbDescription
-				+ ", status=" + status + ", type=" + type + ", reimb_author=" + reimb_author + ", reimb_resolver="
-				+ reimb_resolver + "]";
-	}//end of toString
+				+ ", status=" + status.getStatus() + ", type=" + type.getReimbType() + ", reimb_author=" + reimb_author.getUsername() + ", reimb_resolver="
+				+ reimb_resolver.getUsername() + "]";
+	}
+
+	
+//end of toString
 		
 	
 }// end of class

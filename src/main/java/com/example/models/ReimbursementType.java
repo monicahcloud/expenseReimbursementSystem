@@ -35,6 +35,15 @@ public class ReimbursementType {
 	
 	
 	public ReimbursementType() {}
+	
+	
+
+	public ReimbursementType(String type) {
+		super();
+		this.type = type;
+	}
+
+
 
 	public ReimbursementType(int id, String type) {
 		this.id = id;

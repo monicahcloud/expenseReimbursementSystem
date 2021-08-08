@@ -62,5 +62,9 @@ public class UserServices {
 	public User getUserById(int employee_number) {
 		return uDao.getUserByEmployeeNumber(employee_number);
 	}
+	
+	public User getAuthor(int author) {
+		return uDao.getAuthor(author);
+	}
 
 }//end of class

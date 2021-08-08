@@ -31,7 +31,11 @@ public class JsonServletHelper {
 			break;
 		case "/ExpenseReimbursementSystem/api/session":
 			System.out.println("I am in switch statement case 4 in JsonHelper");
-			SessionController.getSession(req, res);
+			SessionController.getSession(req, res); 
+			break;
+		case "/ExpenseReimbursementSystem/api/addnewReimbursement":
+			System.out.println("I am in switch statement case 5 in JsonHelper");
+			ReimbursementsController.addnewReimbursement(req, res);
 			break;
 	}
 	}

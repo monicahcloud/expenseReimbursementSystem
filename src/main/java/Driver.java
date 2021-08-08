@@ -41,14 +41,15 @@ public class Driver {
 		ReimbursementType reimbType4 = new ReimbursementType(4, "OTHER");
 		
 		User u = new User("Bugs", "Bunny",  "bugs@gmail.com","password", uR2);
-//		User u1 = new User("Roger", "Rabbit", "roger@gmail.com","password",  uR1);
+		User u1 = new User("Roger", "Rabbit", "roger@gmail.com","password",  uR1);
 		User u2 = new User("Easter", "Buny", "egghunt@gmail.com","password",  uR2);
 		User u3 = new User("Elmer", "Fudge", "moody@gmail.com","password",  uR2);
 		User u4 = new User("Daffy", "Duck", "goofyr@gmail.com", "password",  uR1);
-		User u5 = new User("Mickey", "Mouse", "rodent@gmail.com","password",  uR2);
-		User u6= new User("Minnie", "Mouse", "lover@gmail.com","password",  uR2);
+		User u5 = new User("Mickey", "Mouse", "rodent@gmail.com","password",  uR1);
+		User u6= new User("Minnie", "Mouse", "lover@gmail.com","password",  uR1);
 		User u7 = new User("Taz", "Devil", "psycho@gmail.com","password",  uR1);
 		User u8 = new User("Miss", "Piggy", "bosslady@gmail.com","password",  uR2);
+		
 		
 //		User u3 = uServ.login("MickeyMouse1483", "password");
 //		System.out.println(u3);
@@ -67,21 +68,34 @@ public class Driver {
 
 		uDao.addUser(u7);
 		uDao.addUser(u8);
-//		uDao.addUser(u3);
+		uDao.addUser(u1);
 
-		Reimbursement r1 = new Reimbursement (150, "3 night business trip in San Diego, CA", reimbType3, u2);
+		Reimbursement r1 = new Reimbursement (150, "3 night business trip in San Diego, CA", reimbStatus1, reimbType3, u2, u);
 		rDao.addReimb(r1);
-		Reimbursement r2 = new Reimbursement (250, "Business Trip: Airplane and Car rental", reimbType1, u2);
+		Reimbursement r2 = new Reimbursement (250, "Business Trip: Airplane and Car rental", reimbStatus2, reimbType3, u3, u2);
 		rDao.addReimb(r2);
-		Reimbursement r3 = new Reimbursement (150, "personal mini vacation at companies expense", reimbType2, u3);
+		Reimbursement r3 = new Reimbursement (150, "personal mini vacation at companies expense", reimbStatus2, reimbType2, u3, u8);
 		rDao.addReimb(r3);
 		
-		Reimbursement r5 = new Reimbursement (150, "3 night business trip in San Diego, CA", reimbType4, u4);
+		Reimbursement r5 = new Reimbursement (410, "3 night business trip in San Diego, CA",reimbStatus1, reimbType4, u4, u6);
 		rDao.addReimb(r5);
-		Reimbursement r6 = new Reimbursement (250, "Business Trip: Airplane and Car rental", reimbType3, u5);
+		Reimbursement r6 = new Reimbursement (250, "Business Trip: Airplane and Car rental", reimbStatus1,reimbType3, u5, u);
 		rDao.addReimb(r6);
-		Reimbursement r7 = new Reimbursement (150, "personal mini vacation at companies expense", reimbType1, u6);
+		Reimbursement r7 = new Reimbursement (150, "personal mini vacation at companies expense", reimbStatus3, reimbType1, u3,u6);
 		rDao.addReimb(r7);
+		Reimbursement r8 = new Reimbursement (150, "3 night business trip in San Diego, CA",reimbStatus1, reimbType3, u1, u);
+		rDao.addReimb(r8);
+		Reimbursement r9 = new Reimbursement (250, "Business Trip: Airplane and Car rental", reimbStatus1, reimbType1,u7, u2);
+		rDao.addReimb(r9);
+		Reimbursement r10 = new Reimbursement (150, "personal mini vacation at companies expense",reimbStatus1, reimbType2, u3, u2);
+		rDao.addReimb(r10);
+		
+		Reimbursement r11 = new Reimbursement (150, "3 night business trip in San Diego, CA",reimbStatus2, reimbType4, u4, u);
+		rDao.addReimb(r11);
+		Reimbursement r12 = new Reimbursement (250, "Business Trip: Airplane and Car rental",reimbStatus3, reimbType3, u5, u6);
+		rDao.addReimb(r12);
+		Reimbursement r13 = new Reimbursement (150, "personal mini vacation at companies expense", reimbStatus1,reimbType1, u6, u8);
+		rDao.addReimb(r13);
 		
 		List<Reimbursement> rList = new ArrayList<Reimbursement>();
 		rList.add(r1);

@@ -47,14 +47,22 @@ public class LoginController {
 		try {
 			System.out.println("In the login attempt");
 			User u = uServ.login(username, password);
+			int id = u.getEmpNumber();
+			int role = u.getUserRole().getId();
 			System.out.println(u);
 			//We will keep track of if the user is logged in by storing their username in the session
-			req.getSession().setAttribute("employee_number", u.getEmpNumber());
+			req.getSession().setAttribute("employee_number", id);
+			req.getSession().setAttribute("userRole", role);
 			res.setStatus(HttpServletResponse.SC_OK);
 			res.addHeader("Access-Control-Allow-Origin", "*");
 			res.setHeader("Access-Control-Allow-Methods", "POST");
-			//res.getWriter().write(new ObjectMapper().writeValueAsString(u));
-			res.getWriter().println("User signed in!");
+			
+			ObjectNode user = mapper.createObjectNode();
+			
+			user.put("employee_number", id);
+			user.put("userRole", role);
+			res.getWriter().write(new ObjectMapper().writeValueAsString(user));
+			//res.getWriter().println("User signed in!");
 
 		}
 		catch(Exception e) {

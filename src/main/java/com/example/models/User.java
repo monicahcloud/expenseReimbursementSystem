@@ -43,12 +43,7 @@ public class User {
 	private String password;
 	
 	@Column(name="email", nullable=false, unique=true)
-	private String email;
-
-//	@JsonIgnore
-//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-//	private List<Reimbursement> reimbList;
-	
+	private String email;	
 
 	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="role_FK")
@@ -64,6 +59,11 @@ public class User {
 
 	public User() {
 //	reimbList = new ArrayList<Reimbursement>();
+	}
+
+	public User(String username) {
+		
+		this.username = username;
 	}
 
 	public User(String firstName, String lastName, String email, String password,  UserRole userRole) {
@@ -186,6 +186,32 @@ public class User {
 	public void setUserRole(UserRole userRole) {
 		this.role = userRole;
 	}
+	
+	
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	public List<Reimbursement> getRemList() {
+		return remList;
+	}
+
+	public void setRemList(List<Reimbursement> remList) {
+		this.remList = remList;
+	}
+
+	public List<Reimbursement> getReimList() {
+		return reimList;
+	}
+
+	public void setReimList(List<Reimbursement> reimList) {
+		this.reimList = reimList;
+	}
+
 	@Override
 	public String toString() {
 		return "User [empNumber=" + empNumber + ", firstName=" + firstName + ", lastName=" + lastName + ", username="

@@ -42,8 +42,24 @@ public class UserDaoDB implements UserDao {
 	@Override
 	public User getUserByUserName(String username) {
 		Session ses = HibernateUtil.getSession();
-		User user = ses.createQuery("from User where username=:username", User.class).setString("username", username).uniqueResult();
-		return user;
+		List<User> userList = ses.createQuery("from User where username= '" +username+"'", User.class).list();
+		if (userList.size()==0) {
+			return null;
+		}return userList.get(0);
+	}
+	
+//	@Override
+//	public User getUserByUserName(String username) {
+//		Session ses = HibernateUtil.getSession();
+//		User user = ses.createQuery("from User where username=:username", User.class).setString("username", username).uniqueResult();
+//		return user;
+//	}
+	
+	@Override
+	public User getUserById(int id) {
+		Session ses = HibernateUtil.getSession();
+		User u = ses.createQuery("from User where id ="+id,User.class).uniqueResult();
+		return u;
 	}
 
 	@Override
@@ -53,6 +69,12 @@ public class UserDaoDB implements UserDao {
 		ses.delete(u);
 		tx.commit();
 		
+	}
+
+	@Override
+	public User getAuthor(int author) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

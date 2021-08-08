@@ -19,18 +19,18 @@ public class RequestViewHelper {
 			return LoginViewController.fetchLoginPage(req);
 			
 		case "/ExpenseReimbursementSystem/employeeServices" :
-			System.out.println("This is a test1");
+			System.out.println("This is a test2");
 			return LoginViewController.fetchLoginPage(req);
 			
 		case "/ExpenseReimbursementSystem/managerServices" :
-			System.out.println("This is a test1");
+			System.out.println("This is a test3");
 			return LoginViewController.fetchLoginPage(req);
 			
 		case "/ExpenseReimbursementSystem/landing" :
-			System.out.println("This is a test1");
+			System.out.println("This is a test4");
 			return LoginViewController.fetchLoginPage(req);
 			
-		}System.out.println("This is a test2");
+		}System.out.println("This is a test5");
 		return "/ExpenseReimbursementSystem/api/landing";
 	}
 }

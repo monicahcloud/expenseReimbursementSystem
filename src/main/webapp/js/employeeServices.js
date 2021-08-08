@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $('#createReimbursements').click(function () {
-        alert('test')
+        alert('You are about to make a reimbursement request.. Do you wish to continue?')
     })
 
     const createReim = async () => {
@@ -9,7 +9,7 @@ $(document).ready(function () {
         let rAmount = $('#amountInput').val();
         let rDesc = $('#descriptionInput').val();
         let role = parseInt($('.radio-group').val())
-
+ 		console.log(empId)
         console.log(rAmount)
         console.log(rDesc)
         console.log(role)
@@ -17,7 +17,7 @@ $(document).ready(function () {
         $('#employeeId').val("");
         $('#amountInput').val("");
         $('#descriptionInput').val("");
-        $('#employeeId').val("");
+        $('#employeeID').val("");
 
         //$(".radio-group").selected === false;
 
@@ -30,7 +30,7 @@ $(document).ready(function () {
             amount: rAmount,
             description: rDesc,
             roleId: role,
-            userId: empId
+            employeeID: empId
         };
         let req = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/addnewReimbursement', {
             method: 'POST',

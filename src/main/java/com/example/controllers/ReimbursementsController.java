@@ -79,19 +79,23 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode parsedObj = mapper.readTree(data);
 			
-			int employeeID = Integer.parseInt(parsedObj.get("employeeId").asText());
+			int employeeID = Integer.parseInt(parsedObj.get("employeeID").asText());
 			int amount = Integer.parseInt(parsedObj.get("amount").asText());
 			String description = parsedObj.get("description").asText();
 			int roleId = Integer.parseInt(parsedObj.get("roleId").asText());
-			String type = String.valueOf(parsedObj.get("type").asText());
+			//String type = String.valueOf(parsedObj.get("type").asText());
+			
 			User u = uServ.getUserById(employeeID);
 			User a = uServ.getAuthor(roleId);
-			
-			ReimbursementType t = rServ.getReimbursementType(type);
-			rServ.addReimbursement(amount, description, a);
+			System.out.println(employeeID);
+			//ReimbursementType t = rServ.getReimbursementType(type);
+			Reimbursement r1 = new Reimbursement (amount, description,  u);
+			rDao.addReimb(r1);
+//			rDao.addReimb(null);
+//			rServ.addReimbursement(amount, description, u);
 			
 			ObjectNode ret = mapper.createObjectNode();
-			ret.put("message", "successfully submitted a new reimbursment");
+			ret.put("message", "Successfully Sumbmitted A New Reimbursement Request");
 			res.addHeader("Access-Control-Allow-Origin", "*");
 			res.setHeader("Access-Control-Allow-Methods", "POST");
 			res.getWriter().write(new ObjectMapper().writeValueAsString(ret));

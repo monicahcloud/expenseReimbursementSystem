@@ -36,7 +36,7 @@ List<Reimbursement> getAllPendingReimbursmentsForUser(User u);
 	
 	List<Reimbursement> getAllDeniedReimbursmentsForUser(User u);
 
-	ReimbursementType getReimbursementType(String ersType);
+	ReimbursementType getReimbursementType(int type);
 	
 	ReimbursementType retrieveType(int reimb_id1);
 	

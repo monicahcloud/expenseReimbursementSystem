@@ -32,11 +32,7 @@ public List<Reimbursement> getAllRemib(){
 	return rDao.selectAllReimb();
 	}
 
-	      	 
-public ReimbursementType getReimbursementType(String ersType) {
-	return rDao.getReimbursementType(ersType);
-}
-	      	 
+      	 
 
 public Reimbursement addReimbursement(  int reimbAmount,  String reimbDescription ,ReimbursementType type ,User reimb_author) {
 	Reimbursement r = new Reimbursement( reimbAmount, reimbDescription, type, reimb_author);
@@ -71,6 +67,11 @@ public Reimbursement addReimbursement(int amount, String description,  User a) {
 	rList.add(r);
 	uDao.updateUser(a);
 	return r;
+	
+}
+
+public ReimbursementType getReimbursementType(int type) {
+	return rDao.getReimbursementType(type);
 	
 }
 

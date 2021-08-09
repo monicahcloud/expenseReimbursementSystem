@@ -9,6 +9,7 @@ $(document).ready(function () {
         let rAmount = $('#amountInput').val();
         let rDesc = $('#descriptionInput').val();
         let role = parseInt($('.radio-group').val())
+       
  		console.log(empId)
         console.log(rAmount)
         console.log(rDesc)
@@ -17,7 +18,7 @@ $(document).ready(function () {
         $('#employeeId').val("");
         $('#amountInput').val("");
         $('#descriptionInput').val("");
-        $('#employeeID').val("");
+     	 $('.radio-group').val("");
 
         //$(".radio-group").selected === false;
 
@@ -29,7 +30,7 @@ $(document).ready(function () {
         let rObj = {
             amount: rAmount,
             description: rDesc,
-            roleId: role,
+           roleId: role,
             employeeID: empId
         };
         let req = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/addnewReimbursement', {
@@ -45,6 +46,7 @@ $(document).ready(function () {
         }
         else {
             let res = await req.json();
+             alert("Reimbursement Submitted!!!");
             console.log(res)
            
         }
@@ -58,34 +60,3 @@ $(document).ready(function () {
 
 
 
-/*console.log("In employee js");
-
-
-window.onload = getReimbursement();
-
-let container = document.getElementById('employee-container');
-
-async function getReimbursement(){
-	let res = await fetch('http://localhost:8080/ExpenseReimbursementSystem/api/reimbursements');
-	let data = await res.json();
-	populateReimbursement(data);
-
-}
-
-
-function populate(data) {
-	for (postObj of data) {
-		let post = document.createElement('div');
-		
-		post.innerHTML = `
-		<p>Reimbursement ID: ${postObj.reimb_id} </p>
-		<p>Reimbursement Amount: ${postObj.amount} </p>
-		<p>Reason: ${postObj.description}</p>
-		<p>Date submitted: ${postObj.date}</p>
-		<p>Date Employee ID: ${postObj.reimb_author}</p>
-        <p>Type: ${postObj.type}</p><br>`;
-		console.log(postObj);
-		container.append(post);
-	}
-}
-*/

@@ -60,7 +60,7 @@ public class ReimbursementType {
 
 	@Override
 	public String toString() {
-		return "ReimbursementType [type=" +type + "]";
+		return "ReimbursementType [type=" + type + "]";
 	}
 	
 	

@@ -169,11 +169,15 @@ public class ReimbursementDaoDB implements ReimbursementDao{
 
 	@Override
 
-	public ReimbursementType getReimbursementType(String ersType) {
+	public ReimbursementType getReimbursementType(int type) {
 		Session ses = HibernateUtil.getSession();
-		ReimbursementType r = ses.createQuery("from ReimbursementType where type=" + ersType, ReimbursementType.class).uniqueResult();
+		System.out.println(type);
+		System.err.println(type);		
+		ReimbursementType r = ses.createQuery("from ReimbursementType where type_id=" + type, ReimbursementType.class).uniqueResult();
+		System.out.println(r);
 		return r;
 	}
+
 	
 	
 		

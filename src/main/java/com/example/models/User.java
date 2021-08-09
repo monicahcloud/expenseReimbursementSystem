@@ -215,7 +215,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [empNumber=" + empNumber + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
-				+ username + ", password=" + password + ", email=" + email + ", role=" + role + "]";
+				+ username + ", password=" + password + ", email=" + email + ", role=" + role.getRole() + "]";
 	}
 
 //	public List<Reimbursement> getReimbList() {

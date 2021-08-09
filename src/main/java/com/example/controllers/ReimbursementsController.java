@@ -29,8 +29,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 		private static ReimbursementServices rServ = new ReimbursementServices(rDao, uDao);
 		private static UserServices uServ = new UserServices(uDao);
 	
-		
-		
 		public static void handleReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
 			if(req.getMethod().equals("GET")) {
 			
@@ -42,8 +40,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 				res.getWriter().write(new ObjectMapper().writeValueAsString(rList));
 		}
 		}
-		
-		
 		
 		public static void getAllById(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
 		int id = Integer.parseInt(req.getParameter("id"));
@@ -60,8 +56,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 		}
 		res.getWriter().write((new ObjectMapper().writeValueAsString(retList)));
 		}
-		
-		
 		
 		
 		public static void addnewReimbursement(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
@@ -81,15 +75,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 			
 			int employeeID = Integer.parseInt(parsedObj.get("employeeID").asText());
 			int amount = Integer.parseInt(parsedObj.get("amount").asText());
+			System.out.println(amount);
 			String description = parsedObj.get("description").asText();
 			int roleId = Integer.parseInt(parsedObj.get("roleId").asText());
-			//String type = String.valueOf(parsedObj.get("type").asText());
+			System.out.println(parsedObj.get("roleId"));
+			//int type = Integer.parseInt(parsedObj.get("type").asText());
 			
 			User u = uServ.getUserById(employeeID);
 			User a = uServ.getAuthor(roleId);
 			System.out.println(employeeID);
-			//ReimbursementType t = rServ.getReimbursementType(type);
-			Reimbursement r1 = new Reimbursement (amount, description, u);
+			ReimbursementType t = rServ.getReimbursementType(roleId);
+			Reimbursement r1 = new Reimbursement (amount, description, t, u);
 			rDao.addReimb(r1);
 			
 			ObjectNode ret = mapper.createObjectNode();
